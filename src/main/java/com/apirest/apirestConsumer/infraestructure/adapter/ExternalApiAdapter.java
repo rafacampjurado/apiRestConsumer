@@ -19,20 +19,28 @@ public class ExternalApiAdapter implements ExternalApiServicePort {
 
     @Override
     public List<Integer> relatedProductsIdsById(String productId) {
-        return webClient.get()
-                .uri("/{id}/similarids", productId)
-                .retrieve()
-                .bodyToFlux(Integer.class)
-                .collectList()
-                .block(); // Blocking for simplicity, consider using reactive patterns in production code
+        try {
+            return webClient.get()
+                    .uri("/{id}/similarids", productId)
+                    .retrieve()
+                    .bodyToFlux(Integer.class)
+                    .collectList()
+                    .block();
+        } catch (Exception e) {
+            throw new RuntimeException("Error buscando el producto con ID " + productId, e);
+        }
     }
 
     @Override
     public Product relatedProductById(String productId) {
-        return webClient.get()
-                .uri("/{id}", productId)
-                .retrieve()
-                .bodyToMono(Product.class)
-                .block(); // Blocking for simplicity, consider using reactive patterns in production code
+        try {
+            return webClient.get()
+                    .uri("/{id}", productId)
+                    .retrieve()
+                    .bodyToMono(Product.class)
+                    .block(); // Blocking for simplicity, consider using reactive patterns in production code
+        } catch (Exception e) {
+            throw new RuntimeException("Error buscando el producto con ID " + productId, e);
+        }
     }
 }
