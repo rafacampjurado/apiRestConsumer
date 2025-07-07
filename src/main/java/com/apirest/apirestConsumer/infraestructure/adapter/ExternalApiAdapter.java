@@ -20,7 +20,7 @@ public class ExternalApiAdapter implements ExternalApiServicePort {
     @Override
     public List<Integer> relatedProductsIdsById(String productId) {
         return webClient.get()
-                .uri("/products/{id}/similarids", productId)
+                .uri("/{id}/similarids", productId)
                 .retrieve()
                 .bodyToFlux(Integer.class)
                 .collectList()
@@ -30,7 +30,7 @@ public class ExternalApiAdapter implements ExternalApiServicePort {
     @Override
     public Product relatedProductById(String productId) {
         return webClient.get()
-                .uri("/products/{id}", productId)
+                .uri("/{id}", productId)
                 .retrieve()
                 .bodyToMono(Product.class)
                 .block(); // Blocking for simplicity, consider using reactive patterns in production code

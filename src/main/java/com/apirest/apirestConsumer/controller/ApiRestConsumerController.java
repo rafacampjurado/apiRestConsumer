@@ -12,9 +12,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/product")
 public class ApiRestConsumerController {
+
     private final ProductServicePort productServicePort;
 
-    public ApiRestConsumerController(ProductServicePort productServicePort) {
+    public ApiRestConsumerController(final ProductServicePort productServicePort) {
         this.productServicePort = productServicePort;
     }
 

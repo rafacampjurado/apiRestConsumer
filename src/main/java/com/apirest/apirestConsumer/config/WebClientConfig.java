@@ -12,7 +12,7 @@ public class WebClientConfig {
     @Bean
     public WebClient apiWebClient() {
         return WebClient.builder()
-                .baseUrl("http://localhost:3001")
+                .baseUrl("http://localhost:3001/product")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
 
